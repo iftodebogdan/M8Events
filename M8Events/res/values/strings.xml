@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">M8 Events</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="eventsButtonText">Evenimente</string>
+    <string name="facebookButtonText">Facebook</string>
+    <string name="eventsIconContentDescription">eventButton</string>
+    <string name="facebookLogoIconContentDescription">facebookButton</string>
+    <string name="BackgroundImageContentDescription">backgroundImage</string>
+    <string name="title_activity_events_list">Events List</string>
+
+</resources>
