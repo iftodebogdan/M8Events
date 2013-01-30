@@ -10,5 +10,13 @@
     <string name="facebookLogoIconContentDescription">facebookButton</string>
     <string name="BackgroundImageContentDescription">backgroundImage</string>
     <string name="title_activity_events_list">Events List</string>
+    <string name="eventslist_xml_url">http://www.addiction-band.com/test.xml</string>
+    <string name="toast_xml_bad_url">Eroare: E00001</string>
+    <string name="toast_xml_parse_error">Eroare: E00002</string>
+    <string name="progress_dialog_loading_message">Se incarca</string>
+    <string name="alert_dialog_message">Verificati conexiunea la Internet</string>
+    <string name="alert_dialog_title">Eroare de retea</string>
+    <string name="toast_no_events">Nu exista evenimente</string>
+    <string name="toast_xml_empty">Eroare: E00003</string>
 
 </resources>
