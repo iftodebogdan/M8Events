@@ -19,6 +19,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -47,7 +48,19 @@ public class EventsListActivity extends Activity {
 	@Override
 	public void onStart() {
 	    super.onStart();  // Always call the superclass method first
-
+	    
+	    drawUI();
+	}
+	
+	//This code is executed when the Activity is first created
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_events_list);
+	}
+	
+	//This method draws the UI
+	private void drawUI() {
 	    //Check if we have network connection
 	    ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 	    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
@@ -74,13 +87,7 @@ public class EventsListActivity extends Activity {
 	    	}) 
 	    	.show();
 	    }
-	}
-	
-	//This code is executed when the Activity is first created
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_events_list);
+
 	}
 	
 	//This class extends AsyncTask in order to run in a background thread
@@ -98,14 +105,14 @@ public class EventsListActivity extends Activity {
 		@Override
         protected void onPostExecute(Object result) {
 			//Attempt to populate the ListView using the XML file we got earlier
-			PopulateEventsListView((String)result);
+			populateEventsListView((String)result);
 			//The ProgressDialog can now be dismissed
 			pd.dismiss();
        }
 	}
 	
 	//This method attempts to populate our ListView using the XML file it gets as a parameter
-	private void PopulateEventsListView(String xml) {
+	private void populateEventsListView(String xml) {
 		//Attempt to parse the XML file
 		List<Map<String, String>> eventsList = getEventsList(xml);
 		//If unsuccessful then return
@@ -206,4 +213,15 @@ public class EventsListActivity extends Activity {
 		return true;
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.menu_refresh:
+	            drawUI();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
 }
