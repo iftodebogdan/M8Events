@@ -28,24 +28,41 @@ import android.widget.Toast;
 
 public class EventsListActivity extends Activity {
 
+	//The ProgressDialog and the reference to the background task
 	private ProgressDialog pd;
+	private AsyncTask<?, ?, ?> PopulateEventsListViewTask = null;
 	
+	//This code is executed when the Activity loses focus 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_events_list);
-		
-		ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+	public void onStop() {
+	    super.onStop();  // Always call the superclass method first
+
+		//Dismiss the ProgressDialog and kill the background task
+	    pd.dismiss();
+	    if(PopulateEventsListViewTask != null)
+	    	PopulateEventsListViewTask.cancel(true);
+	}
+	
+	//This code is executed when the Activity is first created on when it comes back to the foreground
+	@Override
+	public void onStart() {
+	    super.onStart();  // Always call the superclass method first
+
+	    //Check if we have network connection
+	    ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 	    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 	    if (networkInfo != null && networkInfo.isConnected()) {
+	    	//If we have then show a progress dialog and run a background thread which attempts to
+	    	//connect to the remote server and populate our ListView with data from an XML file
         	pd = ProgressDialog.show(
         			this,
         			"",
         			getString(R.string.progress_dialog_loading_message),
         			true,
         			false);
-            new EventsListView().execute();
+            PopulateEventsListViewTask = new PopulateEventsListViewAsyncTask().execute();
 	    } else {
+	    	//If not then show an AlertDialog and finish() the Activity
 	    	new AlertDialog.Builder(this).setMessage(getString(R.string.alert_dialog_message)) 
 	    	.setTitle(getString(R.string.alert_dialog_title)) 
 	    	.setCancelable(true) 
@@ -59,26 +76,43 @@ public class EventsListActivity extends Activity {
 	    }
 	}
 	
-	private class EventsListView extends AsyncTask<Object, Object, Object> {
+	//This code is executed when the Activity is first created
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_events_list);
+	}
+	
+	//This class extends AsyncTask in order to run in a background thread
+	private class PopulateEventsListViewAsyncTask extends AsyncTask<Object, Object, Object> {
 
+		//This code is executed when execute() is called on this object
 		@Override
 		protected Object doInBackground(Object... params) {
+			//Attempt to get the XML file from the remote server
 			String xml = XmlFunctions.getXML(getString(R.string.eventslist_xml_url));
 			return (Object)xml;
 		}
 		
+		//This code is executed after execute() has finished
 		@Override
         protected void onPostExecute(Object result) {
+			//Attempt to populate the ListView using the XML file we got earlier
 			PopulateEventsListView((String)result);
+			//The ProgressDialog can now be dismissed
 			pd.dismiss();
        }
 	}
 	
-	private void PopulateEventsListView(String xml) {		
+	//This method attempts to populate our ListView using the XML file it gets as a parameter
+	private void PopulateEventsListView(String xml) {
+		//Attempt to parse the XML file
 		List<Map<String, String>> eventsList = getEventsList(xml);
+		//If unsuccessful then return
 		if(eventsList == null)
 			return;
 		
+		//Else start populating the ListView
 		SimpleAdapter adapter = new SimpleAdapter(this, eventsList,
                 android.R.layout.simple_list_item_2,
                 new String[] {"title", "date"},
@@ -88,20 +122,11 @@ public class EventsListActivity extends Activity {
     	ListView listView = (ListView) findViewById(R.id.eventsList);
     	listView.setAdapter(adapter);
 
+    	//This will handle clicking the items in the ListView
     	listView.setOnItemClickListener(mMessageClickedHandler);
 	}
 	
-	// Create a message handling object as an anonymous class.
-	private OnItemClickListener mMessageClickedHandler = new OnItemClickListener() {
-	    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	    	Toast toast = Toast.makeText(
-	    			getApplicationContext(),
-	    			(CharSequence)("Clicked " + ((HashMap<String,String>)parent.getItemAtPosition(position)).get("eid")),
-	    			Toast.LENGTH_SHORT);
-	    	toast.show();
-	    }
-	};
-	
+	//This method attempts to parse the XML file
 	private List<Map<String, String>> getEventsList(String xml) {		
 		//In case of bad URL
         if(xml == null) {
@@ -148,7 +173,7 @@ public class EventsListActivity extends Activity {
 	    	finish();
 		}
 
-  		//fill in the list items from the XML document
+  		//Fill in the list items from the XML document
 		List<Map<String, String>> eventsList = new ArrayList<Map<String, String>>();
 		for(int i = 0; i < nodes.getLength(); i++)
     	{
@@ -162,6 +187,17 @@ public class EventsListActivity extends Activity {
 		
 		return eventsList;
 	}
+	
+	// Create a message handling object as an anonymous class.
+	private OnItemClickListener mMessageClickedHandler = new OnItemClickListener() {
+	    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	    	Toast toast = Toast.makeText(
+	    			getApplicationContext(),
+	    			(CharSequence)("Clicked " + ((HashMap<String,String>)parent.getItemAtPosition(position)).get("eid")),
+	    			Toast.LENGTH_SHORT);
+	    	toast.show();
+	    }
+	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
