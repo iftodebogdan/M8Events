@@ -14,7 +14,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -40,7 +39,9 @@ public class EventsListActivity extends Activity {
 	    super.onStop();  // Always call the superclass method first
 
 		//Dismiss the ProgressDialog and kill the background task
-	    pd.dismiss();
+	    if(pd != null)
+	    	if(pd.isShowing())
+	    		pd.dismiss();
 	    if(PopulateEventsListViewTask != null)
 	    	PopulateEventsListViewTask.cancel(true);
 	}
@@ -116,7 +117,8 @@ public class EventsListActivity extends Activity {
 			//Attempt to populate the ListView using the XML file we got earlier
 			populateEventsListView((String)result);
 			//The ProgressDialog can now be dismissed
-			pd.dismiss();
+			if(pd.isShowing())
+				pd.dismiss();
        }
 	}
 	
