@@ -14,6 +14,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -72,7 +73,15 @@ public class EventsListActivity extends Activity {
         			"",
         			getString(R.string.progress_dialog_loading_message),
         			true,
-        			false);
+        			true);
+        	pd.setOnCancelListener(new DialogInterface.OnCancelListener(){
+                @Override
+                public void onCancel(DialogInterface dialog){
+                	if(PopulateEventsListViewTask != null)
+            	    	PopulateEventsListViewTask.cancel(true);
+                	finish();
+                }
+            });
             PopulateEventsListViewTask = new PopulateEventsListViewAsyncTask().execute();
 	    } else {
 	    	//If not then show an AlertDialog and finish() the Activity
