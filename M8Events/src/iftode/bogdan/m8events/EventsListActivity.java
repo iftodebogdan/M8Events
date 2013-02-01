@@ -133,7 +133,7 @@ public class EventsListActivity extends Activity {
 		//Else start populating the ListView
 		SimpleAdapter adapter = new SimpleAdapter(this, eventsList,
                 android.R.layout.simple_list_item_2,
-                new String[] {"title", "date"},
+                new String[] {"title", "desc"},
                 new int[] {android.R.id.text1,
                            android.R.id.text2});
     	
@@ -198,8 +198,8 @@ public class EventsListActivity extends Activity {
 			Element e = (Element)nodes.item(i);
     		Map<String, String> event = new HashMap<String, String>(3);
     		event.put("eid", XmlFunctions.getValue(e, "EventID"));
-    	    event.put("title", XmlFunctions.getValue(e, "Title"));
-    	    event.put("date", XmlFunctions.getValue(e, "Date"));
+    	    event.put("title", XmlFunctions.getValue(e, "Name"));
+    	    event.put("desc", XmlFunctions.getValue(e, "Desc"));
     	    eventsList.add(event);
     	}
 		

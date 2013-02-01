@@ -10,7 +10,7 @@
     <string name="facebookLogoIconContentDescription">facebookButton</string>
     <string name="BackgroundImageContentDescription">backgroundImage</string>
     <string name="title_activity_events_list">Events List</string>
-    <string name="eventslist_xml_url">http://www.addiction-band.com/test.xml</string>
+    <string name="eventslist_xml_url">http://www.addiction-band.com/m8/iftode.bogdan.m8events_EventsList.php</string>
     <string name="toast_xml_bad_url">Eroare: E00001</string>
     <string name="toast_xml_parse_error">Eroare: E00002</string>
     <string name="progress_dialog_loading_message">Se incarca</string>
