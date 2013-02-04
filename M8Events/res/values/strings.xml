@@ -3,13 +3,13 @@
 
     <string name="app_name">M8 Events</string>
     <string name="hello_world">Hello world!</string>
-    <string name="menu_refresh">Refresh</string>
-    <string name="eventsButtonText">Evenimente</string>
-    <string name="facebookButtonText">Facebook</string>
-    <string name="eventsIconContentDescription">eventButton</string>
-    <string name="facebookLogoIconContentDescription">facebookButton</string>
-    <string name="BackgroundImageContentDescription">backgroundImage</string>
-    <string name="title_activity_events_list">Events List</string>
+    <string name="menu_refresh">Reimprospateaza</string>
+    <string name="events_button_text">Evenimente</string>
+    <string name="facebook_button_text">Facebook</string>
+    <string name="events_icon_content_description">eventButton</string>
+    <string name="facebook_logo_icon_content_description">facebookButton</string>
+    <string name="background_image_content_description">backgroundImage</string>
+    <string name="title_activity_events_list">Evenimente</string>
     <string name="eventslist_xml_url">http://www.addiction-band.com/m8/iftode.bogdan.m8events_EventsList.php</string>
     <string name="toast_xml_bad_url">Eroare: E00001</string>
     <string name="toast_xml_parse_error">Eroare: E00002</string>
@@ -18,5 +18,18 @@
     <string name="alert_dialog_title">Eroare de retea</string>
     <string name="toast_no_events">Nu exista evenimente</string>
     <string name="toast_xml_empty">Eroare: E00003</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_event_details">Detalii eveniment</string>
+    <string name="toast_not_instanceof_HashMap">Eroare: E00004</string>
+    <string name="event_details_image_content_description">eventDetailsImage</string>
+    <string name="event_details_image_view_UnsupportedEncodingException">Eroare: E00005</string>
+    <string name="event_details_image_view_MalformedURLException">Eroare: E00006</string>
+    <string name="event_details_image_view_IOException">Eroare: E00007</string>
+    <string name="event_details_image_url">http://www.addiction-band.com/m8/img/</string>
+    <string name="toast_date_parse_exception">Eroare: E00008</string>
+    <string name="menu_maps">Arata pe harta</string>
+    <string name="menu_calendar">Salveaza in calendar</string>
+    <string name="maps_icon_content_description">mapsIcon</string>
+    <string name="calendar_icon_content_description">calendarIcon</string>
 
 </resources>

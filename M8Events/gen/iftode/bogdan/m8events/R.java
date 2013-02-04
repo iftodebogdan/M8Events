@@ -12,45 +12,79 @@ public final class R {
     }
     public static final class drawable {
         public static final int bg_main=0x7f020000;
-        public static final int events_icon=0x7f020001;
-        public static final int f_logo=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int ic_menu_refresh=0x7f020004;
+        public static final int calendar_icon=0x7f020001;
+        public static final int events_icon=0x7f020002;
+        public static final int f_logo=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int ic_menu_calendar=0x7f020005;
+        public static final int ic_menu_maps=0x7f020006;
+        public static final int ic_menu_refresh=0x7f020007;
+        public static final int maps_icon=0x7f020008;
     }
     public static final class id {
         public static final int backgroundImage=0x7f070000;
-        public static final int buttonLayout=0x7f070002;
-        public static final int eventButtonTextView=0x7f070006;
-        public static final int eventsIcon=0x7f070003;
-        public static final int eventsList=0x7f070001;
-        public static final int facebookButtonTextView=0x7f070007;
-        public static final int facebookLogoIcon=0x7f070004;
-        public static final int menu_refresh=0x7f070008;
-        public static final int textLayout=0x7f070005;
+        public static final int buttonLayout=0x7f07000f;
+        public static final int calendarButtonTextView=0x7f07000d;
+        public static final int calendarIcon=0x7f07000a;
+        public static final int eventButtonTextView=0x7f070013;
+        public static final int eventDetailsButtonLayout=0x7f070008;
+        public static final int eventDetailsDateTextView=0x7f070006;
+        public static final int eventDetailsDescriptionTextView=0x7f070003;
+        public static final int eventDetailsImageView=0x7f070001;
+        public static final int eventDetailsLinearLayout=0x7f070005;
+        public static final int eventDetailsLocationTextView=0x7f070004;
+        public static final int eventDetailsNameTextView=0x7f070002;
+        public static final int eventDetailsTextLayout=0x7f07000b;
+        public static final int eventDetailsTimeTextView=0x7f070007;
+        public static final int eventsIcon=0x7f070010;
+        public static final int eventsList=0x7f07000e;
+        public static final int facebookButtonTextView=0x7f070014;
+        public static final int facebookLogoIcon=0x7f070011;
+        public static final int mapsButtonTextView=0x7f07000c;
+        public static final int mapsIcon=0x7f070009;
+        public static final int menu_calendar=0x7f070017;
+        public static final int menu_maps=0x7f070016;
+        public static final int menu_refresh=0x7f070015;
+        public static final int textLayout=0x7f070012;
     }
     public static final class layout {
-        public static final int activity_events_list=0x7f030000;
-        public static final int activity_main=0x7f030001;
+        public static final int activity_event_details=0x7f030000;
+        public static final int activity_events_list=0x7f030001;
+        public static final int activity_main=0x7f030002;
     }
     public static final class menu {
-        public static final int activity_events_list=0x7f060000;
-        public static final int activity_main=0x7f060001;
+        public static final int activity_event_details=0x7f060000;
+        public static final int activity_events_list=0x7f060001;
+        public static final int activity_main=0x7f060002;
     }
     public static final class string {
-        public static final int BackgroundImageContentDescription=0x7f040007;
         public static final int alert_dialog_message=0x7f04000d;
         public static final int alert_dialog_title=0x7f04000e;
         public static final int app_name=0x7f040000;
-        public static final int eventsButtonText=0x7f040003;
-        public static final int eventsIconContentDescription=0x7f040005;
+        public static final int background_image_content_description=0x7f040007;
+        public static final int calendar_icon_content_description=0x7f04001d;
+        public static final int event_details_image_content_description=0x7f040014;
+        public static final int event_details_image_url=0x7f040018;
+        public static final int event_details_image_view_IOException=0x7f040017;
+        public static final int event_details_image_view_MalformedURLException=0x7f040016;
+        public static final int event_details_image_view_UnsupportedEncodingException=0x7f040015;
+        public static final int events_button_text=0x7f040003;
+        public static final int events_icon_content_description=0x7f040005;
         public static final int eventslist_xml_url=0x7f040009;
-        public static final int facebookButtonText=0x7f040004;
-        public static final int facebookLogoIconContentDescription=0x7f040006;
+        public static final int facebook_button_text=0x7f040004;
+        public static final int facebook_logo_icon_content_description=0x7f040006;
         public static final int hello_world=0x7f040001;
+        public static final int maps_icon_content_description=0x7f04001c;
+        public static final int menu_calendar=0x7f04001b;
+        public static final int menu_maps=0x7f04001a;
         public static final int menu_refresh=0x7f040002;
+        public static final int menu_settings=0x7f040011;
         public static final int progress_dialog_loading_message=0x7f04000c;
+        public static final int title_activity_event_details=0x7f040012;
         public static final int title_activity_events_list=0x7f040008;
+        public static final int toast_date_parse_exception=0x7f040019;
         public static final int toast_no_events=0x7f04000f;
+        public static final int toast_not_instanceof_HashMap=0x7f040013;
         public static final int toast_xml_bad_url=0x7f04000a;
         public static final int toast_xml_empty=0x7f040010;
         public static final int toast_xml_parse_error=0x7f04000b;

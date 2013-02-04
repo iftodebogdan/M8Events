@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
         android:src="@drawable/bg_main"
-        android:contentDescription="@string/BackgroundImageContentDescription" />
+        android:contentDescription="@string/background_image_content_description" />
 
     <LinearLayout
         android:id="@+id/buttonLayout"
@@ -29,7 +29,7 @@
             android:src="@drawable/events_icon"
             android:clickable="true"
             android:onClick="startEventsListActivity"
-            android:contentDescription="@string/eventsIconContentDescription" />
+            android:contentDescription="@string/events_icon_content_description" />
 
         <ImageView
             android:id="@+id/facebookLogoIcon"
@@ -39,7 +39,7 @@
             android:src="@drawable/f_logo"
             android:clickable="true"
             android:onClick="openFacebookPage"
-            android:contentDescription="@string/facebookLogoIconContentDescription" />
+            android:contentDescription="@string/facebook_logo_icon_content_description" />
     </LinearLayout>
 
     <LinearLayout
@@ -53,7 +53,7 @@
             android:id="@+id/eventButtonTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/eventsButtonText"
+            android:text="@string/events_button_text"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="center_horizontal"
@@ -64,7 +64,7 @@
             android:id="@+id/facebookButtonTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/facebookButtonText"
+            android:text="@string/facebook_button_text"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="center_horizontal"

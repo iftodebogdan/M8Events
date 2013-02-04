@@ -1,0 +1,171 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EventDetailsActivity" >
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_main"
+        android:contentDescription="@string/background_image_content_description" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignTop="@+id/eventDetailsImageView"
+        android:layout_centerHorizontal="true" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/eventDetailsNameTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+	           android:layout_marginLeft="10dp"
+	           android:layout_marginRight="10dp"
+	           android:layout_marginTop="5dp"
+	           android:layout_marginBottom="5dp" />
+
+            <ImageView
+			 android:id="@+id/eventDetailsImageView"
+			 android:layout_width="match_parent"
+			 android:layout_height="wrap_content"
+			 android:layout_centerHorizontal="true"
+			 android:layout_centerVertical="true"
+			 android:contentDescription="@string/event_details_image_content_description"
+			 android:layout_below="@id/eventDetailsNameTextView"
+	           android:layout_marginLeft="5dp"
+	           android:layout_marginRight="5dp" />
+
+            <TextView
+                android:id="@+id/eventDetailsDescriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_below="@id/eventDetailsImageView"
+	           android:layout_marginLeft="10dp"
+	           android:layout_marginRight="10dp"
+	           android:layout_marginTop="5dp"
+	           android:layout_marginBottom="5dp" />
+
+            <TextView
+                android:id="@+id/eventDetailsLocationTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eventDetailsDescriptionTextView"
+	           android:layout_marginLeft="10dp"
+	           android:layout_marginRight="10dp"
+	           android:layout_marginTop="5dp"
+	           android:layout_marginBottom="5dp"
+            	 android:gravity="center_horizontal"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <LinearLayout
+                android:id="@+id/eventDetailsLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eventDetailsLocationTextView" >
+
+                <TextView
+                    android:id="@+id/eventDetailsDateTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+		          android:layout_marginLeft="10dp"
+		          android:layout_marginRight="10dp"
+		          android:layout_marginTop="5dp"
+		          android:layout_marginBottom="5dp"
+            		android:gravity="center_horizontal"
+                	android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/eventDetailsTimeTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+		          android:layout_marginLeft="10dp"
+		          android:layout_marginRight="10dp"
+		          android:layout_marginTop="5dp"
+		          android:layout_marginBottom="5dp"
+            		android:gravity="center_horizontal"
+                	android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </LinearLayout>
+            
+            <LinearLayout
+		    android:id="@+id/eventDetailsButtonLayout"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_centerHorizontal="true"
+		    android:layout_centerVertical="true"
+		    android:layout_marginTop="25dp"
+		    android:visibility="invisible"
+		    android:layout_below="@id/eventDetailsLinearLayout" >
+		
+		    <ImageView
+		        android:id="@+id/mapsIcon"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:src="@drawable/maps_icon"
+		        android:clickable="true"
+		        android:onClick="showLocationOnMap"
+		        android:contentDescription="@string/maps_icon_content_description" />
+		
+		    <ImageView
+		        android:id="@+id/calendarIcon"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:src="@drawable/calendar_icon"
+		        android:clickable="true"
+		        android:onClick="addToCalendar"
+		        android:contentDescription="@string/calendar_icon_content_description" />
+		</LinearLayout>
+		
+		<LinearLayout
+		    android:id="@+id/eventDetailsTextLayout"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_centerHorizontal="true"
+		    android:visibility="invisible"
+		    android:layout_below="@id/eventDetailsButtonLayout" >
+		
+		    <TextView
+		        android:id="@+id/mapsButtonTextView"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:text="@string/menu_maps"
+		        android:layout_weight="1"
+		        android:textAppearance="?android:attr/textAppearanceSmall"
+		        android:gravity="center_horizontal"
+		        android:layout_marginTop="10dp"
+		    	   android:layout_marginBottom="10dp"
+		        android:textColor="@android:color/white" />
+		
+		    <TextView
+		        android:id="@+id/calendarButtonTextView"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:text="@string/menu_calendar"
+		        android:layout_weight="1"
+		        android:textAppearance="?android:attr/textAppearanceSmall"
+		        android:gravity="center_horizontal"
+		        android:layout_marginTop="10dp"
+		    	   android:layout_marginBottom="10dp"
+		        android:textColor="@android:color/white" />
+		
+		</LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

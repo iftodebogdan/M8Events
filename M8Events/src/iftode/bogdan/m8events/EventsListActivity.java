@@ -9,11 +9,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -46,7 +48,7 @@ public class EventsListActivity extends Activity {
 	    	PopulateEventsListViewTask.cancel(true);
 	}
 	
-	//This code is executed when the Activity is first created on when it comes back to the foreground
+	//This code is executed when the Activity is first created or when it comes back to the foreground
 	@Override
 	public void onStart() {
 	    super.onStart();  // Always call the superclass method first
@@ -55,10 +57,12 @@ public class EventsListActivity extends Activity {
 	}
 	
 	//This code is executed when the Activity is first created
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_events_list);
+			
 	}
 	
 	//This method draws the UI
@@ -156,7 +160,7 @@ public class EventsListActivity extends Activity {
         	return null;
         }
         
-      //In case of empty file
+        //In case of empty file
         if(xml.length() == 0) {
             Toast toast = Toast.makeText(
             		getApplicationContext(),
@@ -208,12 +212,20 @@ public class EventsListActivity extends Activity {
 	
 	// Create a message handling object as an anonymous class.
 	private OnItemClickListener mMessageClickedHandler = new OnItemClickListener() {
-	    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	    	Toast toast = Toast.makeText(
-	    			getApplicationContext(),
-	    			(CharSequence)("Clicked " + ((HashMap<String,String>)parent.getItemAtPosition(position)).get("eid")),
-	    			Toast.LENGTH_SHORT);
-	    	toast.show();
+	    @SuppressWarnings("unchecked")
+		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	    	if(parent.getItemAtPosition(position) instanceof HashMap) {
+		    	Intent intent = new Intent(getApplicationContext(), EventDetailsActivity.class);
+		    	intent.putExtra("Event_ID", ((HashMap<String,String>)parent.getItemAtPosition(position)).get("eid"));
+		    	startActivity(intent);
+		    }
+	    	else {
+	    		Toast toast = Toast.makeText(
+		    			getApplicationContext(),
+		    			getApplicationContext().getString(R.string.toast_not_instanceof_HashMap),
+		    			Toast.LENGTH_SHORT);
+		    	toast.show();
+	    	}
 	    }
 	};
 

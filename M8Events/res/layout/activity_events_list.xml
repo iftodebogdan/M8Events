@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
         android:src="@drawable/bg_main"
-        android:contentDescription="@string/BackgroundImageContentDescription" />
+        android:contentDescription="@string/background_image_content_description" />
 
     <ListView
         android:id="@+id/eventsList"
