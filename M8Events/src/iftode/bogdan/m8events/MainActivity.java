@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.SoundEffectConstants;
 import android.view.View;
 
 public class MainActivity extends Activity {
@@ -23,8 +24,9 @@ public class MainActivity extends Activity {
 	}
 */
 	
-	/** Called when the user clicks the Events button */
+	// Called when the user clicks the Events button
 	public void startEventsListActivity(View view) {
+		view.playSoundEffect(SoundEffectConstants.CLICK);
 		Intent intent = new Intent(this, EventsListActivity.class);
 	    startActivity(intent);
 	}
@@ -39,8 +41,9 @@ public class MainActivity extends Activity {
 		   }
 		}
 	
-	/** Called when the user clicks the Facebook button */
+	// Called when the user clicks the Facebook button
 	public void openFacebookPage(View view) {
+		view.playSoundEffect(SoundEffectConstants.CLICK);
 		startActivity(getOpenFacebookIntent(this));
 	}
 }

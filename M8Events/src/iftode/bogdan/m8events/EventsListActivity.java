@@ -22,6 +22,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -214,6 +215,7 @@ public class EventsListActivity extends Activity {
 	private OnItemClickListener mMessageClickedHandler = new OnItemClickListener() {
 	    @SuppressWarnings("unchecked")
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+	    	v.playSoundEffect(SoundEffectConstants.CLICK);
 	    	if(parent.getItemAtPosition(position) instanceof HashMap) {
 		    	Intent intent = new Intent(getApplicationContext(), EventDetailsActivity.class);
 		    	intent.putExtra("Event_ID", ((HashMap<String,String>)parent.getItemAtPosition(position)).get("eid"));

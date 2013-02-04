@@ -30,6 +30,7 @@ import android.provider.CalendarContract.Events;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -246,11 +247,13 @@ public class EventDetailsActivity extends Activity {
 	
 	//Method which handles mapsIcon button clicks
 	public void showLocationOnMap(View view) {
+		view.playSoundEffect(SoundEffectConstants.CLICK);
 		showLocationOnMap();
 	}
 	
 	//Method which handles calendarIcon button clicks
 	public void addToCalendar(View view) {
+		view.playSoundEffect(SoundEffectConstants.CLICK);
 		addToCalendar();
 	}
 	
