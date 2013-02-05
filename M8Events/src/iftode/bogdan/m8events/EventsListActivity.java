@@ -137,7 +137,7 @@ public class EventsListActivity extends Activity {
 		
 		//Else start populating the ListView
 		SimpleAdapter adapter = new SimpleAdapter(this, eventsList,
-                android.R.layout.simple_list_item_2,
+                R.layout.simple_list_item_2_with_arrow,
                 new String[] {"title", "desc"},
                 new int[] {android.R.id.text1,
                            android.R.id.text2});

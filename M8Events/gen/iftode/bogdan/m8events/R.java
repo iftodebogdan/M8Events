@@ -18,14 +18,16 @@ public final class R {
         public static final int events_icon=0x7f020004;
         public static final int f_logo=0x7f020005;
         public static final int ic_launcher=0x7f020006;
-        public static final int ic_menu_calendar=0x7f020007;
-        public static final int ic_menu_maps=0x7f020008;
-        public static final int ic_menu_refresh=0x7f020009;
-        public static final int maps_icon=0x7f02000a;
+        public static final int ic_listview_arrow=0x7f020007;
+        public static final int ic_menu_calendar=0x7f020008;
+        public static final int ic_menu_maps=0x7f020009;
+        public static final int ic_menu_refresh=0x7f02000a;
+        public static final int maps_icon=0x7f02000b;
     }
     public static final class id {
         public static final int aboutUsButtonTextView=0x7f07001a;
         public static final int aboutUsIcon=0x7f070017;
+        public static final int arrowIcon=0x7f07001b;
         public static final int backgroundImage=0x7f070000;
         public static final int buttonLayout=0x7f07000f;
         public static final int buttonLayout2=0x7f070015;
@@ -49,9 +51,9 @@ public final class R {
         public static final int facebookLogoIcon=0x7f070011;
         public static final int mapsButtonTextView=0x7f07000c;
         public static final int mapsIcon=0x7f070009;
-        public static final int menu_calendar=0x7f07001d;
-        public static final int menu_maps=0x7f07001c;
-        public static final int menu_refresh=0x7f07001b;
+        public static final int menu_calendar=0x7f07001e;
+        public static final int menu_maps=0x7f07001d;
+        public static final int menu_refresh=0x7f07001c;
         public static final int textLayout=0x7f070012;
         public static final int textLayout2=0x7f070018;
     }
@@ -59,6 +61,7 @@ public final class R {
         public static final int activity_event_details=0x7f030000;
         public static final int activity_events_list=0x7f030001;
         public static final int activity_main=0x7f030002;
+        public static final int simple_list_item_2_with_arrow=0x7f030003;
     }
     public static final class menu {
         public static final int activity_event_details=0x7f060000;
@@ -73,6 +76,7 @@ public final class R {
         public static final int alert_dialog_message=0x7f04000d;
         public static final int alert_dialog_title=0x7f04000e;
         public static final int app_name=0x7f040000;
+        public static final int arrow_icon_content_description=0x7f040024;
         public static final int background_image_content_description=0x7f040007;
         public static final int calendar_icon_content_description=0x7f04001d;
         public static final int contact_us_button_text=0x7f040020;

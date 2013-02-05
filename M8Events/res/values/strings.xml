@@ -37,5 +37,6 @@
     <string name="about_us_button_text">Despre noi</string>
     <string name="about_us_dialog_title">Despre noi</string>
     <string name="about_us_dialog_message">We don\'t just manage events, we make art!</string>
+    <string name="arrow_icon_content_description">arrowIcon</string>
 
 </resources>
