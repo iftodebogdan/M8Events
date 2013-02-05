@@ -31,5 +31,11 @@
     <string name="menu_calendar">Salveaza in calendar</string>
     <string name="maps_icon_content_description">mapsIcon</string>
     <string name="calendar_icon_content_description">calendarIcon</string>
+    <string name="contact_us_icon_content_description">contactUsIcon</string>
+    <string name="about_us_icon_content_description">aboutUsIcon</string>
+    <string name="contact_us_button_text">Contacteaza-ne</string>
+    <string name="about_us_button_text">Despre noi</string>
+    <string name="about_us_dialog_title">Despre noi</string>
+    <string name="about_us_dialog_message">We don\'t just manage events, we make art!</string>
 
 </resources>

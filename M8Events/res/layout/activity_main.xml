@@ -15,11 +15,16 @@
         android:contentDescription="@string/background_image_content_description" />
 
     <LinearLayout
-        android:id="@+id/buttonLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" >
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
         <ImageView
             android:id="@+id/eventsIcon"
@@ -45,9 +50,7 @@
     <LinearLayout
         android:id="@+id/textLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/buttonLayout" >
+        android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/eventButtonTextView"
@@ -71,6 +74,64 @@
             android:layout_marginTop="10dp"
             android:textColor="@android:color/white" />
 
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/buttonLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp" >
+
+        <ImageView
+            android:id="@+id/contactUsIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/contact_us_icon"
+            android:clickable="true"
+            android:onClick="contactUs"
+            android:contentDescription="@string/contact_us_icon_content_description" />
+
+        <ImageView
+            android:id="@+id/aboutUsIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/about_us_icon"
+            android:clickable="true"
+            android:onClick="aboutUs"
+            android:contentDescription="@string/about_us_icon_content_description" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/textLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/contactUsButtonTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/contact_us_button_text"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/aboutUsButtonTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/about_us_button_text"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+    
     </LinearLayout>
 
 </RelativeLayout>

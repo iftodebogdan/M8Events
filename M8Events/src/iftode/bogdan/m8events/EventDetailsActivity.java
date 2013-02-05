@@ -3,6 +3,7 @@ package iftode.bogdan.m8events;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -264,29 +265,15 @@ public class EventDetailsActivity extends Activity {
 	}
 	
 	//Method which broadcasts an intent to Calendar app
-	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-	private void addToCalendar() {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {           
-    		Intent intent = new Intent(Intent.ACTION_EDIT);
-    		intent.setType("vnd.android.cursor.item/event");
-    		intent.putExtra("beginTime", EventDate.getTime());
-    		intent.putExtra("endTime", EventDate.getTime()+60*1000);
-    		intent.putExtra("title", EventName);
-    		intent.putExtra("description", EventSumDesc);
-    		intent.putExtra("eventLocation", EventLocName);
-    		startActivity(intent);
-    	}
-    	else {
-        	Intent CalendarIntent = new Intent(Intent.ACTION_INSERT)
-        	        .setData(Events.CONTENT_URI)
-        	        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, EventDate.getTime())
-        	        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, EventDate.getTime()+60*1000)
-        	        .putExtra(Events.TITLE, EventName)
-        	        .putExtra(Events.DESCRIPTION, EventSumDesc)
-        	        .putExtra(Events.EVENT_LOCATION, EventLocName)
-        	        .putExtra(Events.AVAILABILITY, Events.AVAILABILITY_FREE);
-        	startActivity(CalendarIntent);
-    	}
+	private void addToCalendar() {          
+		Intent intent = new Intent(Intent.ACTION_EDIT);
+		intent.setType("vnd.android.cursor.item/event");
+		intent.putExtra("beginTime", EventDate.getTime());
+		intent.putExtra("endTime", EventDate.getTime()+60*60*1000);
+		intent.putExtra("title", EventName);
+		intent.putExtra("description", EventSumDesc);
+		intent.putExtra("eventLocation", EventLocName);
+		startActivity(intent);
 	}
 	
 	@Override

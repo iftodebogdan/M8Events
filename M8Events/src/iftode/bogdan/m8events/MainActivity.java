@@ -1,7 +1,9 @@
 package iftode.bogdan.m8events;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -45,5 +47,30 @@ public class MainActivity extends Activity {
 	public void openFacebookPage(View view) {
 		view.playSoundEffect(SoundEffectConstants.CLICK);
 		startActivity(getOpenFacebookIntent(this));
+	}
+	
+	// Called when the user clicks the Contact Us button
+	public void contactUs(View view) {
+		view.playSoundEffect(SoundEffectConstants.CLICK);
+		Intent email = new Intent(Intent.ACTION_SEND);
+		email.putExtra(Intent.EXTRA_EMAIL, new String[]{"m8office@gmail.com"});
+		email.setType("message/rfc822");
+		startActivity(Intent.createChooser(email, "Alege un client de Email:"));
+	}
+	
+	// Called when the user clicks the About Us button
+	public void aboutUs(View view) {
+		view.playSoundEffect(SoundEffectConstants.CLICK);
+		//Show an AlertDialog with info about M8 Events
+    	new AlertDialog.Builder(this).setMessage(getString(R.string.about_us_dialog_message)) 
+    	.setTitle(getString(R.string.about_us_dialog_title))
+    	.setCancelable(true) 
+    	.setNeutralButton(android.R.string.ok, 
+    	new DialogInterface.OnClickListener() { 
+	    	public void onClick(DialogInterface dialog, int whichButton){
+	    		
+	    	} 
+    	}) 
+    	.show();
 	}
 }
