@@ -35,13 +35,13 @@ public class MainActivity extends Activity {
 	
 	public static Intent getOpenFacebookIntent(Context context) {
 
-		   try {
-		    context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
-		    return new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/319964834769696"));
-		   } catch (Exception e) {
-		    return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/319964834769696"));
-		   }
-		}
+	   try {
+	    context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
+	    return new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/319964834769696"));
+	   } catch (Exception e) {
+	    return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/319964834769696"));
+	   }
+	}
 	
 	// Called when the user clicks the Facebook button
 	public void openFacebookPage(View view) {
@@ -62,8 +62,8 @@ public class MainActivity extends Activity {
 	public void aboutUs(View view) {
 		view.playSoundEffect(SoundEffectConstants.CLICK);
 		//Show an AlertDialog with info about M8 Events
-    	new AlertDialog.Builder(this).setMessage(getString(R.string.about_us_dialog_message)) 
-    	.setTitle(getString(R.string.about_us_dialog_title))
+    	new AlertDialog.Builder(this).setMessage(getString(R.string.alert_dialog_message_about_us)) 
+    	.setTitle(getString(R.string.alert_dialog_title_about_us))
     	.setCancelable(true) 
     	.setNeutralButton(android.R.string.ok, 
     	new DialogInterface.OnClickListener() { 

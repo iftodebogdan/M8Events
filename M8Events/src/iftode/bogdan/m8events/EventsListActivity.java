@@ -91,8 +91,8 @@ public class EventsListActivity extends Activity {
             PopulateEventsListViewTask = new PopulateEventsListViewAsyncTask().execute();
 	    } else {
 	    	//If not then show an AlertDialog and finish() the Activity
-	    	new AlertDialog.Builder(this).setMessage(getString(R.string.alert_dialog_message)) 
-	    	.setTitle(getString(R.string.alert_dialog_title)) 
+	    	new AlertDialog.Builder(this).setMessage(getString(R.string.alert_dialog_message_network_error)) 
+	    	.setTitle(getString(R.string.alert_dialog_title_network_error)) 
 	    	.setCancelable(true) 
 	    	.setNeutralButton(android.R.string.ok, 
 	    	new DialogInterface.OnClickListener() { 
@@ -112,7 +112,7 @@ public class EventsListActivity extends Activity {
 		@Override
 		protected Object doInBackground(Object... params) {
 			//Attempt to get the XML file from the remote server
-			String xml = XmlFunctions.getXML(getString(R.string.eventslist_xml_url));
+			String xml = XmlFunctions.getXML(getString(R.string.url_events_list_xml));
 			return (Object)xml;
 		}
 		
@@ -155,7 +155,7 @@ public class EventsListActivity extends Activity {
         if(xml == null) {
             Toast toast = Toast.makeText(
             		getApplicationContext(),
-            		getString(R.string.toast_xml_bad_url),
+            		getString(R.string.error_toast_xml_bad_url),
             		Toast.LENGTH_LONG);
             toast.show();
         	return null;
@@ -165,7 +165,7 @@ public class EventsListActivity extends Activity {
         if(xml.length() == 0) {
             Toast toast = Toast.makeText(
             		getApplicationContext(),
-            		getString(R.string.toast_xml_empty),
+            		getString(R.string.error_toast_xml_empty),
             		Toast.LENGTH_LONG);
             toast.show();
         	return null;
@@ -177,7 +177,7 @@ public class EventsListActivity extends Activity {
         if(doc == null) {
             Toast toast = Toast.makeText(
             		getApplicationContext(),
-            		getString(R.string.toast_xml_parse_error),
+            		getString(R.string.error_toast_xml_parse_error),
             		Toast.LENGTH_LONG);
             toast.show();
         	return null;
@@ -224,7 +224,7 @@ public class EventsListActivity extends Activity {
 	    	else {
 	    		Toast toast = Toast.makeText(
 		    			getApplicationContext(),
-		    			getApplicationContext().getString(R.string.toast_not_instanceof_HashMap),
+		    			getApplicationContext().getString(R.string.error_toast_not_instanceof_HashMap),
 		    			Toast.LENGTH_SHORT);
 		    	toast.show();
 	    	}

@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
         android:src="@drawable/bg_main"
-        android:contentDescription="@string/background_image_content_description" />
+        android:contentDescription="@string/content_description_background_image" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             android:src="@drawable/events_icon"
             android:clickable="true"
             android:onClick="startEventsListActivity"
-            android:contentDescription="@string/events_icon_content_description" />
+            android:contentDescription="@string/content_description_events_icon" />
 
         <ImageView
             android:id="@+id/facebookLogoIcon"
@@ -44,7 +44,7 @@
             android:src="@drawable/f_logo"
             android:clickable="true"
             android:onClick="openFacebookPage"
-            android:contentDescription="@string/facebook_logo_icon_content_description" />
+            android:contentDescription="@string/content_description_facebook_logo_icon" />
     </LinearLayout>
 
     <LinearLayout
@@ -56,7 +56,7 @@
             android:id="@+id/eventButtonTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/events_button_text"
+            android:text="@string/button_text_events"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="center_horizontal"
@@ -67,7 +67,7 @@
             android:id="@+id/facebookButtonTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/facebook_button_text"
+            android:text="@string/button_text_facebook"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="center_horizontal"
@@ -90,7 +90,7 @@
             android:src="@drawable/contact_us_icon"
             android:clickable="true"
             android:onClick="contactUs"
-            android:contentDescription="@string/contact_us_icon_content_description" />
+            android:contentDescription="@string/content_description_contact_us_icon" />
 
         <ImageView
             android:id="@+id/aboutUsIcon"
@@ -100,7 +100,7 @@
             android:src="@drawable/about_us_icon"
             android:clickable="true"
             android:onClick="aboutUs"
-            android:contentDescription="@string/about_us_icon_content_description" />
+            android:contentDescription="@string/content_description_about_us_icon" />
     </LinearLayout>
 
     <LinearLayout
@@ -112,7 +112,7 @@
             android:id="@+id/contactUsButtonTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/contact_us_button_text"
+            android:text="@string/button_text_contact_us"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="center_horizontal"
@@ -123,7 +123,7 @@
             android:id="@+id/aboutUsButtonTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/about_us_button_text"
+            android:text="@string/button_text_about_us"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:gravity="center_horizontal"

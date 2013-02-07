@@ -1,6 +1,8 @@
 package iftode.bogdan.m8events;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,6 +12,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -22,8 +25,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+import android.provider.CalendarContract;
+import android.provider.CalendarContract.Events;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SoundEffectConstants;
@@ -103,8 +108,8 @@ public class EventDetailsActivity extends Activity {
 			DrawEventDetailsImageViewTask = new DrawEventDetailsImageViewAsyncTask((ImageView) findViewById(R.id.eventDetailsImageView)).execute();
 	    } else {
 	    	//If not then show an AlertDialog and finish() the Activity
-	    	new AlertDialog.Builder(this).setMessage(getString(R.string.alert_dialog_message)) 
-	    	.setTitle(getString(R.string.alert_dialog_title)) 
+	    	new AlertDialog.Builder(this).setMessage(getString(R.string.alert_dialog_message_network_error)) 
+	    	.setTitle(getString(R.string.alert_dialog_title_network_error)) 
 	    	.setCancelable(true) 
 	    	.setNeutralButton(android.R.string.ok, 
 	    	new DialogInterface.OnClickListener() { 
@@ -125,14 +130,23 @@ public class EventDetailsActivity extends Activity {
 	    }
 
 	    protected Bitmap doInBackground(Object... params) {
-	        String url = getApplicationContext().getString(R.string.event_details_image_url) + getIntent().getStringExtra("Event_ID") + ".jpg";
+	        String url = getApplicationContext().getString(R.string.url_event_details_image) + getIntent().getStringExtra("Event_ID") + ".jpg";
 	        Bitmap eventDetailsImage = null;
 	        try {
 	            InputStream in = new java.net.URL(url).openStream();
 	            eventDetailsImage = BitmapFactory.decodeStream(in);
-	        } catch (Exception e) {
-	            Log.e("Error", e.getMessage());
-	            e.printStackTrace();
+	        } catch (MalformedURLException e) {
+	        	Toast toast = Toast.makeText(
+	            		getApplicationContext(),
+	            		getString(R.string.error_toast_image_view_MalformedURLException),
+	            		Toast.LENGTH_LONG);
+	                    toast.show();
+	        } catch (IOException e) {
+	        	Toast toast = Toast.makeText(
+	            		getApplicationContext(),
+	            		getString(R.string.error_toast_image_view_IOException),
+	            		Toast.LENGTH_LONG);
+	                    toast.show();
 	        }
 	        return eventDetailsImage;
 	    }
@@ -150,7 +164,7 @@ public class EventDetailsActivity extends Activity {
 		@Override
 		protected Object doInBackground(Object... params) {
 			//Attempt to get the XML file from the remote server
-			String xml = XmlFunctions.getXML(getString(R.string.eventslist_xml_url) + "?eid=" + getIntent().getStringExtra("Event_ID"));
+			String xml = XmlFunctions.getXML(getString(R.string.url_events_list_xml) + "?eid=" + getIntent().getStringExtra("Event_ID"));
 			return (Object)xml;
 		}
 		
@@ -173,7 +187,7 @@ public class EventDetailsActivity extends Activity {
         if(xml == null) {
             Toast toast = Toast.makeText(
             		getApplicationContext(),
-            		getString(R.string.toast_xml_bad_url),
+            		getString(R.string.error_toast_xml_bad_url),
             		Toast.LENGTH_LONG);
             toast.show();
             finish();
@@ -183,7 +197,7 @@ public class EventDetailsActivity extends Activity {
         if(xml.length() == 0) {
             Toast toast = Toast.makeText(
             		getApplicationContext(),
-            		getString(R.string.toast_xml_empty),
+            		getString(R.string.error_toast_xml_empty),
             		Toast.LENGTH_LONG);
             toast.show();
             finish();
@@ -195,7 +209,7 @@ public class EventDetailsActivity extends Activity {
         if(doc == null) {
             Toast toast = Toast.makeText(
             		getApplicationContext(),
-            		getString(R.string.toast_xml_parse_error),
+            		getString(R.string.error_toast_xml_parse_error),
             		Toast.LENGTH_LONG);
             toast.show();
             finish();
@@ -212,7 +226,7 @@ public class EventDetailsActivity extends Activity {
 		} catch (ParseException e1) {
 			Toast toast = Toast.makeText(
     		getApplicationContext(),
-    		getString(R.string.toast_date_parse_exception),
+    		getString(R.string.error_toast_date_parse_exception),
     		Toast.LENGTH_LONG);
             toast.show();
             finish();
@@ -256,19 +270,53 @@ public class EventDetailsActivity extends Activity {
 	//Method which broadcasts an intent to Maps app
 	private void showLocationOnMap() {
 		Intent MapsIntent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + EventLocCoords));
-  	  	startActivity(MapsIntent);
+  	  	try {
+  	  		startActivity(MapsIntent);
+  	  	} catch(android.content.ActivityNotFoundException e) {
+  	  		Toast toast = Toast.makeText(
+        		getApplicationContext(),
+        		getString(R.string.error_toast_maps_activity_not_found_exception),
+        		Toast.LENGTH_LONG);
+            toast.show();
+  	  	}
 	}
 	
 	//Method which broadcasts an intent to Calendar app
-	private void addToCalendar() {          
-		Intent intent = new Intent(Intent.ACTION_EDIT);
-		intent.setType("vnd.android.cursor.item/event");
-		intent.putExtra("beginTime", EventDate.getTime());
-		intent.putExtra("endTime", EventDate.getTime()+60*60*1000);
-		intent.putExtra("title", EventName);
-		intent.putExtra("description", EventSumDesc);
-		intent.putExtra("eventLocation", EventLocName);
-		startActivity(intent);
+	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+	private void addToCalendar() { 
+		Intent CalendarIntentICS = null, CalendarIntentPreICS = null;
+		
+		CalendarIntentPreICS = new Intent(Intent.ACTION_EDIT)
+			.setType("vnd.android.cursor.item/event")
+			.putExtra("beginTime", EventDate.getTime())
+			.putExtra("endTime", EventDate.getTime()+60*1000)
+			.putExtra("title", EventName)
+			.putExtra("description", EventSumDesc)
+			.putExtra("eventLocation", EventLocName);
+		     
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+		    	 CalendarIntentICS = new Intent(Intent.ACTION_INSERT)
+			         .setData(Events.CONTENT_URI)
+			         .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, EventDate.getTime())
+			         .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, EventDate.getTime()+60*1000)
+			         .putExtra(Events.TITLE, EventName)
+			         .putExtra(Events.DESCRIPTION, EventSumDesc)
+			         .putExtra(Events.EVENT_LOCATION, EventLocName)
+			         .putExtra(Events.AVAILABILITY, Events.AVAILABILITY_FREE);
+
+	try {
+		startActivity(CalendarIntentICS);
+	} catch (Exception e) {
+		try {
+			startActivity(CalendarIntentPreICS);
+		} catch (android.content.ActivityNotFoundException e1) {
+			Toast toast = Toast.makeText(
+        		getApplicationContext(),
+        		getString(R.string.error_toast_calendar_activity_not_found_exception),
+        		Toast.LENGTH_LONG);
+            toast.show();
+		}
+	}
 	}
 	
 	@Override
