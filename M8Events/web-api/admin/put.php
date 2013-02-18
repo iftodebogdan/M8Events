@@ -50,13 +50,13 @@
 	{
 		if($_POST['event_id'])
 			$query = 	"UPDATE events_list SET event_name='".
-					$_POST['event_name'].
+					str_replace("'", "\'", $_POST['event_name']).
 	
 					"',event_summary_description='".
-					$_POST['event_summary_description'].
+					str_replace("'", "\'", $_POST['event_summary_description']).
 	
 					"',event_detailed_description='".
-					$_POST['event_detailed_description'].
+					str_replace("'", "\'", $_POST['event_detailed_description']).
 	
 					"',event_date=".
 					str_replace("-", "", $_POST['event_date']).
@@ -65,22 +65,22 @@
 					str_replace(":", "", $_POST['event_time'])."00".
 	
 					",event_location_name='".
-					$_POST['event_location_name'].
+					str_replace("'", "\'", $_POST['event_location_name']).
 	
 					"',event_location_coords='".
-					$_POST['event_location_coords'].
+					str_replace("'", "\'", $_POST['event_location_coords']).
 	
 					"' WHERE event_id=".
-					$_POST['event_id'];
+					str_replace("'", "\'", $_POST['event_id']);
 		else
 			$query = 	"INSERT INTO events_list VALUES (NULL,'".
-					$_POST['event_name'].
+					str_replace("'", "\'", $_POST['event_name']).
 			
 					"','".
-					$_POST['event_summary_description'].
+					str_replace("'", "\'", $_POST['event_summary_description']).
 			
 					"','".
-					$_POST['event_detailed_description'].
+					str_replace("'", "\'", $_POST['event_detailed_description']).
 			
 					"',".
 					str_replace("-", "", $_POST['event_date']).
@@ -89,14 +89,16 @@
 					str_replace(":", "", $_POST['event_time'])."00".
 			
 					",'".
-					$_POST['event_location_name'].
+					str_replace("'", "\'", $_POST['event_location_name']).
 			
 					"','".
-					$_POST['event_location_coords'].
+					str_replace("'", "\'", $_POST['event_location_coords']).
 		
 					"')";
 		
 		$q = mysql_query($query);
+		
+		$ok = 0;
 		
 		if($q)
 		{
@@ -106,59 +108,62 @@
 			else
 				print 'adaugat';
 			print ' cu succes!</div>';
+			
+			$allowedExts = array("jpg", "jpeg");
+			$extension = end(explode(".", $_FILES["file"]["name"]));
+			if ((	($_FILES["file"]["type"] == "image/jpeg")
+					|| ($_FILES["file"]["type"] == "image/pjpeg"))
+					&& ($_FILES["file"]["size"] < 256000)
+					&& in_array($extension, $allowedExts))
+			{
+				if ($_FILES["file"]["error"] > 0)
+				{
+					print '<div class="alert alert-error">';
+					echo "Cod de retur: " . $_FILES["file"]["error"] . "<br>";
+					print '</div>';
+				}
+				else
+				{
+					print '<div class="alert alert-success">';
+					echo "Fisier incarcat: " . $_FILES["file"]["name"] . "<br>";
+					echo "Tip: " . $_FILES["file"]["type"] . "<br>";
+					echo "Marime: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
+					echo "Fisier temporar: " . $_FILES["file"]["tmp_name"] . "<br>";
+				
+					move_uploaded_file($_FILES["file"]["tmp_name"],
+					"../img/" . ($_POST['event_id'] ? $_POST['event_id'] : mysql_insert_id()) . ".jpg");
+					echo "Salvat in: " . "../img/" . ($_POST['event_id'] ? $_POST['event_id'] : mysql_insert_id()) . ".jpg";
+					print '</div>';
+					$ok = 1;
+				}
+			}
+			else
+				if($_FILES["file"]["size"] > 0)
+				{
+					print '<div class="alert alert-error">';
+					echo "Fisierul este invalid. Imaginea trebuie sa fie in format JPEG si sa aiba sub 256kB.";
+					print '</div>';
+				}
+				else
+				{
+					print '<div class="alert alert-warning">';
+					echo "Nu a fost incarcata nicio imagine.";
+					if($_POST['event_id'])
+						print " Daca ati incarcat deja o imagine, aceasta a ramas nemodificata.";
+					print '</div>';
+					$ok = 1;
+				}
 		}
 		else
 		{
-			print '<div class="alert alert-error">Evenimentul nu a putut fi editat<br/>';
+			print '<div class="alert alert-error">Evenimentul nu a putut fi ';
+			if($_POST['event_id'])
+				print 'editat <br/>';
+			else
+				print 'adaugat <br/>';
 			print mysql_error();
 			print '</div>';
 		}
-		
-		$ok = 0;
-		$allowedExts = array("jpg", "jpeg");
-		$extension = end(explode(".", $_FILES["file"]["name"]));
-		if ((	($_FILES["file"]["type"] == "image/jpeg")
-				|| ($_FILES["file"]["type"] == "image/pjpeg"))
-				&& ($_FILES["file"]["size"] < 256000)
-				&& in_array($extension, $allowedExts))
-		{
-			if ($_FILES["file"]["error"] > 0)
-			{
-				print '<div class="alert alert-error">';
-				echo "Cod de retur: " . $_FILES["file"]["error"] . "<br>";
-				print '</div>';
-			}
-			else
-			{
-				print '<div class="alert alert-success">';
-				echo "Fisier incarcat: " . $_FILES["file"]["name"] . "<br>";
-				echo "Tip: " . $_FILES["file"]["type"] . "<br>";
-				echo "Marime: " . ($_FILES["file"]["size"] / 1024) . " kB<br>";
-				echo "Fisier temporar: " . $_FILES["file"]["tmp_name"] . "<br>";
-			
-				move_uploaded_file($_FILES["file"]["tmp_name"],
-				"../img/" . ($_POST['event_id'] ? $_POST['event_id'] : mysql_insert_id()) . ".jpg");
-				echo "Salvat in: " . "../img/" . ($_POST['event_id'] ? $_POST['event_id'] : mysql_insert_id()) . ".jpg";
-				print '</div>';
-				$ok = 1;
-			}
-		}
-		else
-			if($_FILES["file"]["size"] > 0)
-			{
-				print '<div class="alert alert-error">';
-				echo "Fisierul este invalid. Imaginea trebuie sa fie in format JPEG si sa aiba sub 256kB.";
-				print '</div>';
-			}
-			else
-			{
-				print '<div class="alert alert-warning">';
-				echo "Nu a fost incarcata nicio imagine.";
-				if($_POST['event_id'])
-					print " Daca ati incarcat deja o imagine, aceasta a ramas nemodificata.";
-				print '</div>';
-				$ok = 1;
-			}
 		
 		if($q && $ok)
 			print '<a href="index.php">
