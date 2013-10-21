@@ -5,8 +5,8 @@
     <string name="title_activity_events_list">Evenimente</string>
     <string name="title_activity_event_details">Detalii eveniment</string>
     
-    <string name="url_events_list_xml">http://www.addiction-band.com/m8/iftode.bogdan.m8events_EventsList.php</string>
-    <string name="url_event_details_image">http://www.addiction-band.com/m8/img/</string>
+    <string name="url_events_list_xml">http://iftodebogdan.dlinkddns.com/m8/iftode.bogdan.m8events_EventsList.php</string>
+    <string name="url_event_details_image">http://iftodebogdan.dlinkddns.com/m8/img/</string>
     
     <string name="menu_refresh">Reimprospateaza</string>
     <string name="menu_maps">Arata pe harta</string>

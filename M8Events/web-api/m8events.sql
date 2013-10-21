@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 04, 2013 at 05:55 PM
+-- Generation Time: Oct 21, 2013 at 05:26 PM
 -- Server version: 5.5.23
 -- PHP Version: 5.3.17
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `addict_m8events`
 --
+CREATE DATABASE `m8events` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `m8events`;
 
 -- --------------------------------------------------------
 
